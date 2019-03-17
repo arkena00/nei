@@ -64,6 +64,10 @@ namespace nei
          */
         for (i = 1; i != size; ++i)
         {
+            // create variation variables x and y
+            // apply functions from (inputs / concepts / atomic_ops) to x and y
+            // u[x] & u[y]
+
             u2 = memory_[i];
             bool r0 = u1 == u2;
             //concepts_.add(r0);
