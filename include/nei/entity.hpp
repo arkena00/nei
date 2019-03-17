@@ -28,7 +28,7 @@ namespace nei
         nei::sense<Dimension> senses_;
         std::vector<nei::unit_type> memory_;
 
-        std::vector<> concepts_;
+        //std::vector<> concepts_;
 
         // nei::position
         nei::ndarray<10> position_;

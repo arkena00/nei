@@ -7,7 +7,6 @@
 #include <nei/type.hpp>
 #include <vector>
 #include <iostream>
-#include <iomanip>
 #include <numeric>
 #include <algorithm>
 #include <cassert>
@@ -37,12 +36,9 @@ namespace nei
             return units_[n];
         }
 
-        void display() const
+        const auto& units() const
         {
-            for (auto unit : units_)
-            {
-                std::cout << std::setfill('0') << std::setw(2) << std::hex << unit << " ";
-            }
+            return units_;
         }
 
     private:
