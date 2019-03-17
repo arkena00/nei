@@ -1,14 +1,16 @@
-#include <iostream>
-
 #include <nei/entity.hpp>
 
 int main()
 {
-    nei::entity neia;
+    const nei::universe<1> universe{ 40 };
 
-    //neia.live();
+    nei::entity<1> neia{ universe };
 
-    return 0;
+    universe.display();
+
+    neia.live();
+
+    return WORLD_DOMINATION_SUCCESS;
 }
 
 

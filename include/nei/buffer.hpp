@@ -3,9 +3,14 @@
 
 namespace nei
 {
+    template<int Dimension>
     class buffer
     {
+    public:
         buffer() = default;
+
+    private:
+
     };
 } // nei
 
