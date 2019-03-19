@@ -2,6 +2,7 @@
 #define NEI_ENTITY_HPP
 constexpr int WORLD_DOMINATION_SUCCESS = 0;
 
+#include <nei/concept.hpp>
 #include <nei/ndarray.hpp>
 #include <nei/sense.hpp>
 #include <nei/type.hpp>
@@ -23,12 +24,17 @@ namespace nei
         void notify_sense_update();
         void process_memory_analyse();
 
+        auto concepts()
+        {
+            return concepts_;
+        }
+
     private:
         const nei::universe<Dimension>& universe_;
         nei::sense<Dimension> senses_;
         std::vector<nei::unit_type> memory_;
 
-        //std::vector<> concepts_;
+        std::vector<nei::concept> concepts_;
 
         // nei::position
         nei::ndarray<10> position_;

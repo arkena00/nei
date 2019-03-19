@@ -1,5 +1,6 @@
 #include <nei/entity.hpp>
 #include <bitset>
+#include "concept.hpp"
 
 namespace nei
 {
@@ -35,11 +36,8 @@ namespace nei
         unsigned int size = memory_.size();
 
         // output
-        std::bitset<32> result;
-
-        // initial atomic unit
-        nei::unit_type u1 = memory_[i];
-        nei::unit_type u2 = memory_[i];
+        std::bitset<4> result;
+        int end = 0;
 
         //! generate atomic couples ( couple of 2 ) (n , n)
         //! process couples orders
@@ -66,14 +64,49 @@ namespace nei
         {
             // create variation variables x and y
             // apply functions from (inputs / concepts / atomic_ops) to x and y
-            // u[x] & u[y]
+            //
+            //
+            // variations
+            auto x = 0;
+            auto y = i;
 
-            u2 = memory_[i];
-            bool r0 = u1 == u2;
-            //concepts_.add(r0);
-            bool r1 = u1 ^ u2;
-            std::cout << std::hex << "\n_i: " << i << " u1: " << u1 << " and " << u2  << " r0: " << r0 << "_" << r1;
-            u1 = u2;
+            // data
+            auto datax = memory_[x];
+            auto datay = memory_[y];
+
+            // function
+            auto r = datax == datay;
+            if (r) end = i; // last true operation
+
+            // store result
+            result.set(i, r);
+
+            std::cout << std::hex << "\n_i: " << i << " u1: " << datax << " and " << datay  << " r: " << r;
+        }
+
+        // result
+        std::cout << "\n__" << result;
+
+        // check concept
+        bool concept_known = false;
+        /*
+        for (const auto& concept : concepts_)
+        {
+            if (concept.pattern == r)
+            {
+                concept.increase_comprehension();
+                concept_known = true;
+                break;
+            }
+        }*/
+        if (!concept_known)
+        {
+            nei::concept concept;
+            concept.pattern = result;
+            concept.buffer.resize(end+1);
+            std::copy(memory_.begin(), memory_.begin() + end + 1, concept.buffer.begin());
+            //concept.algo = (x, y, r, OP)
+            concepts_.emplace_back(std::move(concept));
         }
     }
 

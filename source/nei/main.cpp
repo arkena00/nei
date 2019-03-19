@@ -12,6 +12,16 @@ int main()
 
     neia.live();
 
+
+    for (auto concept : neia.concepts())
+    {
+        std::cout << "\nConcepts"
+        << "\n_______"
+        << "\n\tname : " << concept.name()
+        << "\n\tpattern : " << concept.pattern
+        << "\n\tbuffer : " << nei::to_string(concept.buffer);
+    }
+
     return WORLD_DOMINATION_SUCCESS;
 }
 

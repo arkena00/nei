@@ -28,6 +28,7 @@ namespace nei
             units_[0] = 'A';
             units_[1] = 'B';
             units_[2] = 'A';
+            units_[3] = '0';
         }
 
         auto unit_at(unsigned int n) const
