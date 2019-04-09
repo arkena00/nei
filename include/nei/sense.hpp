@@ -16,7 +16,7 @@ namespace nei
     public:
         sense(nei::entity<Dimension>& entity);
 
-        void process();
+        void process(int n);
 
         auto& buffer();
 

@@ -26,6 +26,7 @@ namespace nei
     private:
         std::string name_;
         // processing_context : inputs, variations, operations
+        // identity : byte sequence of context (x = 0, y = i, op = CMP -> VAR_1 00 VAR_2 INPUTS_I OPERATIONS CMP PATTERN  )
 
 
         // type sense_observable abstract composition;

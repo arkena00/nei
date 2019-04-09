@@ -5,10 +5,9 @@
 int main()
 {
     const nei::universe<1> universe{ 40 };
+    nei::display(universe.units());
 
     nei::entity<1> neia{ universe };
-
-    nei::display(universe.units());
 
     neia.live();
 
@@ -24,6 +23,3 @@ int main()
 
     return WORLD_DOMINATION_SUCCESS;
 }
-
-
-

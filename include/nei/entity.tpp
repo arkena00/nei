@@ -13,7 +13,8 @@ namespace nei
     template<int Dimension>
     void entity<Dimension>::live()
     {
-        senses_.process();
+        senses_.process(0);
+        senses_.process(6);
     }
 
     template<int Dimension>
@@ -28,85 +29,106 @@ namespace nei
         process_memory_analyse();
     }
 
+    //! generate atomic couples ( couple of 2 ) (n , n)
+    //! process couples orders
+    // [A B A] C [D (E D] E) F G // 3 N X N concept
+    // A B, B C, C D
+    // (r0), (r1), (r2)
+    /*! nlvl| indexes : result
+     * n0| 0 1 : 0 -> concept c0
+     * n1| 1 2 : 0 -> concept c1
+     * n2| 2 3 : 0 -> concept c1
+     *
+     * 0 1 : 0
+     * 0 2 : 1
+     * 0 3 : 0
+     * 1 2 : 0
+     * 1 3 : 0
+     * 2 3 : 0
+     *
+     * r0 = 0 1 0 0 0 0 store to concept c0
+     * r0 & concept[n]
+     * r0 & shift_concept
+     *
+     * create variation variables x and y
+     * apply functions from (inputs / concepts / atomic_ops) to x and y
+     */
     template<int Dimension>
     void entity<Dimension>::process_memory_analyse()
     {
-        // input params
-        unsigned int i = 0;
-        unsigned int size = memory_.size();
+        // linear input params
+        unsigned int input_index = 0;
+        unsigned int input_size = memory_.size();
 
         // output
         std::bitset<4> result;
-        int end = 0;
 
-        //! generate atomic couples ( couple of 2 ) (n , n)
-        //! process couples orders
-        // [A B A] C [D (E D] E) F G // 3 N X N concept
-        // A B, B C, C D
-        // (r0), (r1), (r2)
-        /*! nlvl| indexes : result
-         * n0| 0 1 : 0 -> concept c0
-         * n1| 1 2 : 0 -> concept c1
-         * n2| 2 3 : 0 -> concept c1
-         *
-         * 0 1 : 0
-         * 0 2 : 1
-         * 0 3 : 0
-         * 1 2 : 0
-         * 1 3 : 0
-         * 2 3 : 0
-         *
-         * r0 = 0 1 0 0 0 0 store to concept c0
-         * r0 & concept[n]
-         * r0 & shift_concept
-         */
-        for (i = 1; i != size; ++i)
+        // input loop // processing loop
+        while (input_index < input_size)
         {
-            // create variation variables x and y
-            // apply functions from (inputs / concepts / atomic_ops) to x and y
-            //
-            //
-            // variations
-            auto x = 0;
-            auto y = i;
+            //std::cout << "\n__" << input_index;
 
-            // data
-            auto datax = memory_[x];
-            auto datay = memory_[y];
+            // range
+            unsigned int range_begin = input_index;
+            unsigned int range_end = input_size;
+            unsigned int range_index = range_begin + 1; // x : input, y : range
 
-            // function
-            auto r = datax == datay;
-            if (r) end = i; // last true operation
+            int end = 0;
+            bool concept_found = false;
 
-            // store result
-            result.set(i, r);
-
-            std::cout << std::hex << "\n_i: " << i << " u1: " << datax << " and " << datay  << " r: " << r;
-        }
-
-        // result
-        std::cout << "\n__" << result;
-
-        // check concept
-        bool concept_known = false;
-        /*
-        for (const auto& concept : concepts_)
-        {
-            if (concept.pattern == r)
+            // range loop
+            for (; range_index != range_end; ++range_index)
             {
-                concept.increase_comprehension();
-                concept_known = true;
-                break;
+                //std::cout << "\n__" << range_index;
+                // variations
+                auto x = input_index;
+                auto y = range_index;
+
+                // data
+                auto datax = memory_[x];
+                auto datay = memory_[y];
+
+                // function
+                auto r = datax == datay; // CMP(datax, datay)
+                // store result
+                result.set(range_index, r);
+
+                //if (r) std::cout << "_______" << x;
+                if (r)
+                {
+                    concept_found = true;
+                    end = range_index; // last true operation
+                }
+
+                std::cout << std::hex << "\n_i: " << input_index << " u1: " << datax << " and " << datay  << " r: " << r;
             }
-        }*/
-        if (!concept_known)
-        {
-            nei::concept concept;
-            concept.pattern = result;
-            concept.buffer.resize(end+1);
-            std::copy(memory_.begin(), memory_.begin() + end + 1, concept.buffer.begin());
-            //concept.algo = (x, y, r, OP)
-            concepts_.emplace_back(std::move(concept));
+
+            // check concept
+            bool concept_known = false;
+            /*
+            for (const auto& concept : concepts_)
+            {
+                if (concept.pattern == r)
+                {
+                    concept.increase_comprehension();
+                    concept_known = true;
+                    break;
+                }
+            }*/
+            if (!concept_known && concept_found)
+            {
+                nei::concept concept;
+                concept.pattern = result;
+                concept.buffer.resize(end+1);
+                std::copy(memory_.begin(), memory_.begin() + end + 1, concept.buffer.begin());
+                //concept.algo = (x, y, r, OP)
+                concepts_.emplace_back(std::move(concept));
+            }
+
+            // result
+            std::cout << "\n__" << result;
+
+            ++input_index;
         }
     }
 

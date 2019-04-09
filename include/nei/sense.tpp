@@ -13,12 +13,12 @@ namespace nei
 
     // we transfer universe data to sense buffer using entity position
     template<int Dimension>
-    void sense<Dimension>::process()
+    void sense<Dimension>::process(int n)
     {
         std::cout << "\nprocess buffer\n";
         for(unsigned int i = 0; i != buffer_.size(); ++i)
         {
-            buffer_[i] = entity_.universe().unit_at(i);
+            buffer_[i] = entity_.universe().unit_at(n + i);
         }
         nei::display(buffer_);
 
