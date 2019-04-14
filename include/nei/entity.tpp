@@ -1,6 +1,7 @@
 #include <nei/entity.hpp>
-#include <bitset>
+#include <nei/utility/bitset.hpp>
 #include "concept.hpp"
+#include "spdlog/spdlog.h"
 
 namespace nei
 {
@@ -8,6 +9,7 @@ namespace nei
     entity<Dimension>::entity(const nei::universe<Dimension>& universe)
          : universe_{ universe }
          , senses_{ *this }
+         , analyser_{ *this }
     {}
 
     template<int Dimension>
@@ -56,56 +58,12 @@ namespace nei
     template<int Dimension>
     void entity<Dimension>::process_memory_analyse()
     {
-        // linear input params
-        unsigned int input_index = 0;
-        unsigned int input_size = memory_.size();
-
-        // output
-        std::bitset<4> result;
-
-        // input loop // processing loop
-        while (input_index < input_size)
-        {
-            //std::cout << "\n__" << input_index;
-
-            // range
-            unsigned int range_begin = input_index;
-            unsigned int range_end = input_size;
-            unsigned int range_index = range_begin + 1; // x : input, y : range
-
-            int end = 0;
-            bool concept_found = false;
-
-            // range loop
-            for (; range_index != range_end; ++range_index)
-            {
-                //std::cout << "\n__" << range_index;
-                // variations
-                auto x = input_index;
-                auto y = range_index;
-
-                // data
-                auto datax = memory_[x];
-                auto datay = memory_[y];
-
-                // function
-                auto r = datax == datay; // CMP(datax, datay)
-                // store result
-                result.set(range_index, r);
-
-                //if (r) std::cout << "_______" << x;
-                if (r)
-                {
-                    concept_found = true;
-                    end = range_index; // last true operation
-                }
-
-                std::cout << std::hex << "\n_i: " << input_index << " u1: " << datax << " and " << datay  << " r: " << r;
-            }
+        analyser_.process(memory_);
+        /*
 
             // check concept
             bool concept_known = false;
-            /*
+
             for (const auto& concept : concepts_)
             {
                 if (concept.pattern == r)
@@ -114,7 +72,7 @@ namespace nei
                     concept_known = true;
                     break;
                 }
-            }*/
+            }
             if (!concept_known && concept_found)
             {
                 nei::concept concept;
@@ -126,10 +84,10 @@ namespace nei
             }
 
             // result
-            std::cout << "\n__" << result;
+            //std::cout << "\n__" << result.ToString();
 
-            ++input_index;
-        }
+            ++linears[0];
+        */
     }
 
     template<int Dimension>

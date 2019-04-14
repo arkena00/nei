@@ -2,7 +2,7 @@
 #define NEI_CONCEPT_HPP
 
 #include <nei/type.hpp>
-#include <bitset>
+#include <nei/utility/bitset.hpp>
 #include <string>
 #include <vector>
 
@@ -20,7 +20,7 @@ namespace nei
 
         const std::string& name() const { return name_; }
 
-        std::bitset<4> pattern;
+        nei::bitset<> pattern;
         std::vector<nei::unit_type> buffer; // observed data of concept
 
     private:

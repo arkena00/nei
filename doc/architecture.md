@@ -19,6 +19,15 @@ Concepts are processed data from processing memory stored in **concept memory**
 ### Concepts memory
 
 
+A B A
+EQ 0 1 = false
+EQ 0 2 = true
+
+NEQ 0 1 = true
+EQ 0 2 = true
+
+A B B B B A
+
 
 
 

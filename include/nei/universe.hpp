@@ -30,10 +30,10 @@ namespace nei
             units_[2] = 'A';
             units_[3] = '0';
 
-            units_[7] = 'A';
-            units_[8] = 'B';
-            units_[9] = 'A';
-            units_[10] = 'Z';
+            units_[7] = 'C';
+            units_[8] = 'D';
+            units_[9] = 'C';
+            units_[10] = 'T';
         }
 
         auto unit_at(unsigned int n) const
