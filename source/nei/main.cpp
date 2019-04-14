@@ -4,6 +4,8 @@
 
 int main()
 {
+    spdlog::set_pattern("%v");
+
     const nei::universe<1> universe{ 40 };
     nei::display(universe.units());
 
@@ -14,7 +16,7 @@ int main()
 
     for (auto concept : neia.concepts())
     {
-        std::cout << "\nConcepts"
+        std::cout << "\nConcept"
         << "\n_______"
         << "\n\tname : " << concept.name()
         << "\n\tpattern : " << concept.pattern

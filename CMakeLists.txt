@@ -7,4 +7,4 @@ set(CMAKE_CXX_STANDARD 17)
 file(GLOB_RECURSE SOURCES "source/nei/*.cpp" "include/nei/*.hpp" "include/nei/*.tpp")
 
 add_executable(nei ${SOURCES})
-target_include_directories(nei PUBLIC "include")
+target_include_directories(nei PUBLIC "include" "third_party/spdlog/include")
