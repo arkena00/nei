@@ -23,7 +23,7 @@ namespace nei
     private:
         nei::entity<Dimension>& entity_;
         //nei::buffer<Dimension> buffer_;
-        std::array<nei::unit_type, 4> buffer_;
+        std::array<nei::unit_type, 7> buffer_;
     };
 } // nei
 

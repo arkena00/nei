@@ -553,7 +553,7 @@ namespace nei
     */
 
     template<typename Block, class Allocator>
-    void bitset<Block, Allocator>::Reset()
+    void bitset<Block, Allocator>::reset()
     {
         set(false);
     }
@@ -567,7 +567,7 @@ namespace nei
     */
 
     template<typename Block, class Allocator>
-    void bitset<Block, Allocator>::Reset(std::size_t bit)
+    void bitset<Block, Allocator>::reset(std::size_t bit)
     {
         set(bit, false);
     }
@@ -669,7 +669,7 @@ namespace nei
 
         if (pos >= m_bitCount)
         {
-            Reset();
+            reset();
             return;
         }
 
@@ -723,7 +723,7 @@ namespace nei
 
         if (pos >= m_bitCount)
         {
-            Reset();
+            reset();
             return;
         }
 
@@ -1263,7 +1263,7 @@ namespace nei
     */
 
     template<typename Block, class Allocator>
-    typename bitset<Block, Allocator>::Bit& bitset<Block, Allocator>::Bit::Reset()
+    typename bitset<Block, Allocator>::Bit& bitset<Block, Allocator>::Bit::reset()
     {
         return set(false);
     }
@@ -1387,7 +1387,7 @@ namespace nei
         // With branching:
         /*
         if (!val)
-            Reset();
+            reset();
         */
 
         return *this;
@@ -1431,7 +1431,7 @@ namespace nei
         // With branching:
         /*
         if (val)
-            Reset();
+            reset();
         */
 
         return *this;

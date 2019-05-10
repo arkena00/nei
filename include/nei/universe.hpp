@@ -36,6 +36,14 @@ namespace nei
             units_[10] = 'T';
         }
 
+        universe(const std::string& data)
+        {
+            for(unsigned int i = 0; i != data.size(); ++i)
+            {
+                units_.emplace_back(data[i]);
+            }
+        }
+
         auto unit_at(unsigned int n) const
         {
             assert(n < units_.size() && n >= 0);

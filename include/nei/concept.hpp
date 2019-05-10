@@ -13,7 +13,10 @@ namespace nei
     class concept
     {
     public:
-        concept() : name_{ "unknown" }, comprehension{ 1 }
+        concept() :
+            name_{ "unknown" }
+            , comprehension{ 1 }
+            , coherence{ 0 }
         {
 
         }
@@ -22,17 +25,21 @@ namespace nei
 
         nei::bitset<> pattern;
         std::vector<nei::unit_type> buffer; // observed data of concept
+        int coherence;
+        int comprehension;
 
     private:
         std::string name_;
+
+
         // processing_context : inputs, variations, operations
         // identity : byte sequence of context (x = 0, y = i, op = CMP -> VAR_1 00 VAR_2 INPUTS_I OPERATIONS CMP PATTERN  )
 
 
         // type sense_observable abstract composition;
 
+
         //
-        int comprehension;
 
         // sense_buffer_list ref;
 

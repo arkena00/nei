@@ -12,6 +12,8 @@ to nei (using nei position)
 ## Concepts
 Concepts are processed data from processing memory stored in **concept memory**
 
+## Analyser
+
 
 ## Memory
 ### Processing memory

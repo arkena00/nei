@@ -1,7 +1,6 @@
 #include <nei/entity.hpp>
 #include <nei/utility/bitset.hpp>
 #include "concept.hpp"
-#include "spdlog/spdlog.h"
 
 namespace nei
 {
@@ -15,8 +14,11 @@ namespace nei
     template<int Dimension>
     void entity<Dimension>::live()
     {
-        senses_.process(0);
-        senses_.process(6);
+        analyser_.process(universe_.units());
+
+        //senses_.process(0);
+        //senses_.process(6);
+        //senses_.process(17);
     }
 
     template<int Dimension>

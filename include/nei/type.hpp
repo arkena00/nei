@@ -5,7 +5,7 @@
 
 namespace nei
 {
-    using unit_type = uint16_t;
+    using unit_type = uint8_t;
 } // nei
 
 #endif // NEI_TYPE_HPP

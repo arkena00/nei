@@ -6,7 +6,7 @@ int main()
 {
     spdlog::set_pattern("%v");
 
-    const nei::universe<1> universe{ 40 };
+    const nei::universe<1> universe{ "ABAC00TZYZ0000000 salut test prout zeta " };
     nei::display(universe.units());
 
     nei::entity<1> neia{ universe };

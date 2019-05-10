@@ -1,10 +1,13 @@
 #ifndef NEI_BITSET_HPP
 #define NEI_BITSET_HPP
 
+//! from https://github.com/DigitalPulseSoftware/NazaraEngine/blob/master/include/Nazara/Core/Bitset.hpp
+
 #include <limits>
 #include <memory>
 #include <type_traits>
 #include <vector>
+#include <string>
 
 namespace nei
 {
@@ -58,8 +61,8 @@ namespace nei
         void Reserve(std::size_t bitCount);
         void Resize(std::size_t bitCount, bool defaultVal = false);
 
-        void Reset();
-        void Reset(std::size_t bit);
+        void reset();
+        void reset(std::size_t bit);
 
         void Reverse();
 
@@ -135,7 +138,7 @@ namespace nei
         Bit(const Bit& bit) = default;
 
         Bit& Flip();
-        Bit& Reset();
+        Bit& reset();
         Bit& set(bool val = true);
         bool Test() const;
 
