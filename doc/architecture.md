@@ -121,4 +121,11 @@ i + 1, 0 1 2 3 : f(data0, data1) : g(r0, r1) : C2
 
 2 5 4 7 : f(C2, i)
 
+logical_reduction
+apply many operation until we find constness. 1 lvl / reduction step
 
+logical_combinaison
+combine concepts logical data with observed data
+
+constness isolation
+fix the range limits
