@@ -108,3 +108,17 @@ C1 : A & A2 = true
 C2 : A & A3 = true
 C3 : C1 & C2 = true
 
+inputs
+iterator
+value
+
+loop
+i + 2, 0 1 0 1 : 1 1 : f(data0, data1) : g(r0, r1) : C1
+i + 2, 2 4 2 4 : 2 2 ... C1(f)
+% similitude : 0.5
+
+i + 1, 0 1 2 3 : f(data0, data1) : g(r0, r1) : C2
+
+2 5 4 7 : f(C2, i)
+
+
